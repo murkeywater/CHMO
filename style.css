@@ -1,0 +1,1047 @@
+/* Сброс стилей и базовые настройки */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #333;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Шапка */
+header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px 40px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.tagline {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+/* Основной контент - две колонки */
+.editor-preview {
+    display: flex;
+    min-height: 800px;
+}
+
+@media (max-width: 1100px) {
+    .editor-preview {
+        flex-direction: column;
+    }
+}
+
+/* Левая колонка - редактор */
+.editor {
+    flex: 1;
+    padding: 30px;
+    background: #f8f9fa;
+    border-right: 2px solid #eaeaea;
+}
+
+.editor h2 {
+    color: #4a5568;
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #667eea;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #4a5568;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Кнопки */
+.buttons {
+    display: flex;
+    gap: 15px;
+    margin: 30px 0;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 14px 24px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s;
+    flex: 1;
+    min-width: 200px;
+}
+
+.btn.primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn.success {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+}
+
+.btn.secondary {
+    background: #e2e8f0;
+    color: #4a5568;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.15);
+}
+
+.btn.small {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    min-width: auto;
+}
+
+/* Выбор шаблона */
+.template-selector {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 2px solid #eaeaea;
+}
+
+.template-selector h3 {
+    margin-bottom: 15px;
+    color: #4a5568;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.templates {
+    display: flex;
+    gap: 20px;
+}
+
+.template {
+    flex: 1;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.template:hover {
+    background: #edf2f7;
+}
+
+.template.active {
+    background: #e2e8f0;
+    border: 2px solid #667eea;
+}
+
+.template-preview {
+    height: 80px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border: 2px solid transparent;
+}
+
+.template.active .template-preview {
+    border-color: #4a5568;
+}
+
+/* Правая колонка - предпросмотр */
+.preview {
+    flex: 1;
+    padding: 30px;
+    background: white;
+}
+
+.preview h2 {
+    color: #4a5568;
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #10b981;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.resume-preview {
+    border: 2px dashed #cbd5e0;
+    border-radius: 15px;
+    padding: 30px;
+    background: #fafafa;
+    min-height: 700px;
+    overflow-y: auto;
+}
+
+/* Стили самого резюме */
+.resume {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.resume-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 25px;
+    border-bottom: 3px solid #667eea;
+}
+
+.resume-header h1 {
+    font-size: 2.2rem;
+    color: #2d3748;
+    margin-bottom: 10px;
+}
+
+.resume-header p {
+    font-size: 1.3rem;
+    color: #4a5568;
+    margin-bottom: 20px;
+}
+
+.contacts {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.contacts p {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #718096;
+}
+
+.resume-section {
+    margin-bottom: 30px;
+}
+
+.resume-section h2 {
+    color: #4a5568;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.4rem;
+}
+
+.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.skill-tag {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+#previewExperience p {
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+
+.preview-actions {
+    margin-top: 30px;
+    padding: 20px;
+    background: #f1f5f9;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.preview-actions p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+}
+
+
+code {
+    background: #2d3748;
+    color: #81e6d9;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-family: monospace;
+}
+
+/* Футер */
+footer {
+    text-align: center;
+    padding: 25px;
+    background: #2d3748;
+    color: #cbd5e0;
+    margin-top: 40px;
+}
+
+footer i.fa-heart {
+    color: #fc8181;
+    margin: 0 5px;
+}
+
+/* Стили для разных шаблонов резюме */
+.resume.template1 {
+    border-left: 5px solid #667eea;
+}
+
+.resume.template2 {
+    border-left: 5px solid #f5576c;
+    background: linear-gradient(135deg, #fdfcfb 0%, #f5f7fa 100%) !important;
+}
+
+.resume.template2 .resume-header {
+    border-bottom: 3px solid #f5576c;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.resume.template2 .skill-tag {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important;
+}
+
+.resume.template3 {
+    border: none;
+    background: white;
+    box-shadow: 0 5px 30px rgba(0,0,0,0.08);
+    padding: 50px;
+}
+
+.resume.template3 .resume-header {
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 20px;
+    margin-bottom: 40px;
+    text-align: left;
+}
+
+.resume.template3 .resume-header h1 {
+    font-size: 2.5rem;
+    color: #1a202c;
+    margin-bottom: 5px;
+}
+
+.resume.template3 .resume-header p {
+    font-size: 1.4rem;
+    color: #4a5568;
+    margin-bottom: 15px;
+}
+
+.resume.template3 .contacts {
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+.resume.template3 .resume-section h2 {
+    color: #2d3748;
+    border-bottom: 2px solid #4a5568;
+    padding-bottom: 5px;
+    font-size: 1.4rem;
+}
+
+.resume.template3 .skill-tag {
+    background: #2d3748;
+    color: white;
+    border-radius: 5px;
+    padding: 6px 12px;
+}
+
+/* Специальные стили для минимализма */
+.resume.template3 .resume-section {
+    margin-bottom: 35px;
+}
+
+.resume.template3 .resume-section:last-child {
+    margin-bottom: 0;
+}
+/* Анимация смены шаблона */
+.resume {
+    transition: all 0.5s ease;
+}
+
+/* Стили для уведомлений */
+.notification {
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    z-index: 10000 !important;
+}
+
+@keyframes slideOut {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(100%); opacity: 0; }
+}
+/* Стили для дополнительных секций */
+.add-section-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.section-btn {
+    padding: 10px 15px;
+    background: #e2e8f0;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s;
+    font-weight: 500;
+    color: #4a5568;
+}
+
+.section-btn:hover {
+    background: #cbd5e0;
+    transform: translateY(-2px);
+}
+
+.section-btn.active {
+    background: #667eea;
+    color: white;
+}
+
+.hint {
+    display: block;
+    margin-top: 5px;
+    color: #718096;
+    font-size: 0.9rem;
+}
+
+/* Стили для динамически добавляемых полей */
+.dynamic-section {
+    background: #f7fafc;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    border-left: 4px solid #48bb78;
+}
+
+.dynamic-section h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #2d3748;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.remove-section {
+    background: #fc8181;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.remove-section:hover {
+    background: #f56565;
+}
+/* Стили для оптимизации PDF экспорта */
+.pdf-export-mode {
+    transform: scale(0.95);
+    opacity: 0.9;
+}
+
+/* Индикатор загрузки */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.fa-spinner {
+    animation: spin 1s linear infinite;
+}
+
+/* Стили для уведомлений об ошибках */
+.notification.error {
+    background: linear-gradient(135deg, #f56565 0%, #e53e3e 100%) !important;
+}
+/* Стили для прогресс-бара */
+.progress-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+}
+
+.progress-content {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    min-width: 400px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+}
+
+.progress-content h3 {
+    color: #2d3748;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    background: #e2e8f0;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    width: 0%;
+    transition: width 0.3s ease;
+    border-radius: 10px;
+}
+/* СТИЛИ ДЛЯ АВАТАРА */
+.avatar-preview-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.avatar-preview {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2rem;
+    overflow: hidden;
+    border: 3px solid #e2e8f0;
+}
+
+.avatar-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* АВАТАР В РЕЗЮМЕ */
+.avatar-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#resumeAvatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #667eea;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.resume.template3 .avatar-container {
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.resume.template3 #resumeAvatar {
+    border: none;
+    box-shadow: 0 3px 20px rgba(0,0,0,0.15);
+}
+
+/* ГЕНЕРАЦИЯ ССЫЛКИ */
+.url-generator {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.url-prefix {
+    background: #e2e8f0;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-weight: 500;
+    color: #4a5568;
+}
+
+.url-preview {
+    background: #f7fafc;
+    padding: 10px 15px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #cbd5e0;
+}
+
+.full-url {
+    font-family: monospace;
+    color: #2d3748;
+    font-weight: 500;
+    word-break: break-all;
+}
+
+.copy-url {
+    padding: 5px 10px;
+    min-width: auto;
+}
+
+/* ТОГГЛ СВИТЧ */
+.toggle-switch {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.toggle-slider {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+    background: #cbd5e0;
+    border-radius: 34px;
+    cursor: pointer;
+    transition: .4s;
+}
+
+.toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background: white;
+    border-radius: 50%;
+    transition: .4s;
+}
+
+#autoSave:checked + .toggle-slider {
+    background: #10b981;
+}
+
+#autoSave:checked + .toggle-slider:before {
+    transform: translateX(26px);
+}
+
+.save-options {
+    background: #f7fafc;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.save-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.btn.danger {
+    background: linear-gradient(135deg, #f56565 0%, #e53e3e 100%);
+    color: white;
+}
+
+/* ПРЕДПРОСМОТР НА УСТРОЙСТВАХ */
+.device-preview-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.device-btn {
+    flex: 1;
+    padding: 10px;
+    background: #e2e8f0;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s;
+    color: #4a5568;
+    font-weight: 500;
+}
+
+.device-btn:hover {
+    background: #cbd5e0;
+}
+
+.device-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+/* МОБИЛЬНЫЙ ВЬЮ */
+@media (max-width: 768px) {
+    .editor-preview {
+        flex-direction: column;
+    }
+    
+    .editor, .preview {
+        width: 100%;
+    }
+    
+    .buttons {
+        flex-direction: column;
+    }
+    
+    .btn {
+        min-width: 100%;
+    }
+    
+    .templates {
+        flex-direction: column;
+    }
+}
+
+/* СТИЛИ ДЛЯ МОБИЛЬНОГО ПРЕДПРОСМОТРА */
+.mobile-preview .resume-preview {
+    max-width: 375px;
+    margin: 0 auto;
+    border: 10px solid #1a202c;
+    border-radius: 30px;
+    padding: 15px;
+    height: 700px;
+    overflow-y: auto;
+    background: white;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+.tablet-preview .resume-preview {
+    max-width: 768px;
+    margin: 0 auto;
+    border: 15px solid #1a202c;
+    border-radius: 20px;
+    padding: 30px;
+    height: 900px;
+    overflow-y: auto;
+    background: white;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+/* НОТИФИКАЦИИ */
+.save-notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #10b981;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    z-index: 1000;
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* LOADING */
+.loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    font-size: 1.5rem;
+    color: #667eea;
+}
+
+.loading i {
+    animation: spin 1s linear infinite;
+    margin-right: 10px;
+}
+/* СТИЛИ ДЛЯ ПРЕДПРОСМОТРА УСТРОЙСТВ */
+/* СТИЛИ ДЛЯ ПРЕДПРОСМОТРА УСТРОЙСТВ */
+
+/* ДЕСКТОП - БЕЗ РАМОК */
+.desktop-preview .resume-preview {
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    border: none !important;
+    padding: 30px !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    background: #fafafa !important;
+}
+
+/* ПЛАНШЕТ - С РАМКОЙ */
+.tablet-preview .resume-preview {
+    width: 768px !important;
+    max-width: 768px !important;
+    height: 900px !important;
+    margin: 20px auto !important;
+    border: 15px solid #1a202c !important;
+    border-top-width: 40px !important;
+    border-bottom-width: 40px !important;
+    border-radius: 25px !important;
+    padding: 40px 30px !important;
+    background: white !important;
+    box-shadow: 0 25px 80px rgba(0,0,0,0.3) !important;
+    position: relative !important;
+    overflow-y: auto !important;
+}
+
+/* КНОПКА ПЛАНШЕТА СВЕРХУ */
+.tablet-preview .resume-preview::before {
+    content: '' !important;
+    position: absolute !important;
+    top: -25px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 60px !important;
+    height: 5px !important;
+    background: #2d3748 !important;
+    border-radius: 10px !important;
+}
+
+/* ТЕЛЕФОН - МАЛЕНЬКАЯ РАМКА */
+.mobile-preview .resume-preview {
+    width: 375px !important;
+    max-width: 375px !important;
+    height: 700px !important;
+    margin: 20px auto !important;
+    border: 15px solid #1a202c !important;
+    border-top-width: 50px !important;
+    border-bottom-width: 50px !important;
+    border-radius: 40px !important;
+    padding: 20px 15px !important;
+    background: white !important;
+    box-shadow: 0 25px 80px rgba(0,0,0,0.3) !important;
+    position: relative !important;
+    overflow-y: auto !important;
+}
+
+/* ЧЁЛКА ТЕЛЕФОНА */
+.mobile-preview .resume-preview::before {
+    content: '' !important;
+    position: absolute !important;
+    top: -35px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 100px !important;
+    height: 25px !important;
+    background: #1a202c !important;
+    border-radius: 20px !important;
+}
+
+/* КНОПКА ТЕЛЕФОНА СНИЗУ */
+.mobile-preview .resume-preview::after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: -35px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 50px !important;
+    height: 50px !important;
+    background: #1a202c !important;
+    border-radius: 50% !important;
+}
+
+/* УБИРАЕМ РАМКИ ДЛЯ ДЕСКТОПА ВООБЩЕ */
+.resume-preview:not(.tablet-preview):not(.mobile-preview) {
+    border: 2px dashed #cbd5e0 !important;
+    border-radius: 15px !important;
+    padding: 30px !important;
+    background: #fafafa !important;
+    min-height: 700px !important;
+    overflow-y: auto !important;
+}
+
+/* ОБЩИЕ СТИЛИ ДЛЯ ВСЕХ ПРЕДПРОСМОТРОВ */
+.resume-preview {
+    transition: all 0.5s ease !important;
+}
+
+/* СТИЛИ ДЛЯ САМОГО РЕЗЮМЕ ВНУТРИ ПРЕДПРОСМОТРА */
+.resume-preview .resume {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* АДАПТАЦИЯ ДЛЯ МОБИЛЬНОГО */
+.mobile-preview .resume-preview .resume {
+    padding: 15px !important;
+    max-width: 100% !important;
+}
+
+.mobile-preview .resume-preview .resume-header h1 {
+    font-size: 1.5rem !important;
+}
+
+.mobile-preview .resume-preview .resume-header p {
+    font-size: 1.1rem !important;
+}
+
+.mobile-preview .resume-preview .resume-section h2 {
+    font-size: 1.2rem !important;
+}
+
+.mobile-preview .resume-preview .contacts {
+    flex-direction: column !important;
+    gap: 5px !important;
+    align-items: flex-start !important;
+}
+
+.mobile-preview .resume-preview .skill-tag {
+    font-size: 0.8rem !important;
+    padding: 4px 8px !important;
+    margin: 2px !important;
+}
+
+/* АДАПТАЦИЯ ДЛЯ ПЛАНШЕТА */
+.tablet-preview .resume-preview .resume {
+    padding: 30px !important;
+}
+
+.tablet-preview .resume-preview .resume-header h1 {
+    font-size: 2rem !important;
+}
+
+.tablet-preview .resume-preview .resume-section h2 {
+    font-size: 1.4rem !important;
+}
+
+/* ИНДИКАТОР АКТИВНОГО УСТРОЙСТВА */
+.device-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4) !important;
+}
+/* БАЗОВЫЕ СТИЛИ ДЛЯ ПРЕДПРОСМОТРА УСТРОЙСТВ */
+.resume-preview {
+    border: 2px dashed #cbd5e0;
+    border-radius: 15px;
+    padding: 30px;
+    background: #fafafa;
+    min-height: 700px;
+    overflow-y: auto;
+    transition: all 0.5s ease;
+}
+
+/* СТИЛИ ДЛЯ КНОПОК УСТРОЙСТВ */
+.device-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+/* УБИРАЕМ ПУНКТИРНУЮ РАМКУ ПРИ ИСПОЛЬЗОВАНИИ JS СТИЛЕЙ */
+.resume-preview[style*="border: 15px solid"] {
+    border: 15px solid #1a202c !important;
+}

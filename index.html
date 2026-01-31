@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResumeBuilder - Конструктор IT-резюме</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Подключаем библиотеки для экспорта в PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Шапка -->
+        <header>
+            <h1><i class="fas fa-code"></i> ResumeBuilder</h1>
+            <p class="tagline">Создай современное IT-резюме за 5 минут</p>
+        </header>
+
+        <!-- Основной контент: редактор и предпросмотр -->
+        <main class="editor-preview">
+            <!-- Левая колонка: редактор -->
+            <section class="editor">
+                <h2><i class="fas fa-edit"></i> Заполни данные</h2>
+                
+                <div class="form-group">
+                    <label for="name"><i class="fas fa-user"></i> ФИО:</label>
+                    <input type="text" id="name" placeholder="Иванов Алексей Петрович">
+                </div>
+
+                <div class="form-group">
+                    <label for="title"><i class="fas fa-briefcase"></i> Должность:</label>
+                    <input type="text" id="title" placeholder="Frontend-разработчик (React)">
+                </div>
+
+                <div class="form-group">
+                    <label for="email"><i class="fas fa-envelope"></i> Email:</label>
+                    <input type="email" id="email" placeholder="alexey@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="github"><i class="fab fa-github"></i> GitHub:</label>
+                    <input type="text" id="github" placeholder="https://github.com/username">
+                </div>
+                <!-- АВАТАР -->
+                <div class="form-group">
+                    <label for="avatar"><i class="fas fa-camera"></i> Аватар (ссылка на фото):</label>
+                        <input type="url" id="avatar" placeholder="https://example.com/photo.jpg">
+                <div class="avatar-preview-container">
+                <div class="avatar-preview" id="avatarPreview">
+                    <i class="fas fa-user"></i>
+        </div>
+        <button type="button" id="uploadAvatar" class="btn small">
+            <i class="fas fa-upload"></i> Загрузить
+        </button>
+        <input type="file" id="avatarFile" accept="image/*" style="display: none;">
+    </div>
+</div>
+
+<!-- ГЕНЕРАЦИЯ ССЫЛКИ -->
+<div class="form-group">
+    <label><i class="fas fa-link"></i> Персональная ссылка:</label>
+    <div class="url-generator">
+        <input type="text" id="customUrl" placeholder="ваше-имя" style="flex: 1;">
+        <span class="url-prefix">resume-builder.com/</span>
+        <button type="button" id="generateUrl" class="btn small">
+            <i class="fas fa-magic"></i> Сгенерировать
+        </button>
+    </div>
+    <div id="urlPreview" class="url-preview">
+        <span class="full-url">resume-builder.com/</span>
+        <button class="btn copy-url" data-clipboard-target="#urlPreview .full-url">
+            <i class="fas fa-copy"></i>
+        </button>
+    </div>
+</div>
+
+<!-- КНОПКА СОХРАНЕНИЯ -->
+<div class="form-group save-options">
+    <label><i class="fas fa-database"></i> Автосохранение:</label>
+    <div class="toggle-switch">
+        <input type="checkbox" id="autoSave" checked>
+        <label for="autoSave" class="toggle-slider"></label>
+        <span>Включено</span>
+    </div>
+    <div class="save-buttons">
+        <button type="button" id="saveNow" class="btn small">
+            <i class="fas fa-save"></i> Сохранить сейчас
+        </button>
+        <button type="button" id="clearStorage" class="btn small danger">
+            <i class="fas fa-trash"></i> Очистить
+        </button>
+    </div>
+</div>
+
+<!-- ПРЕДПРОСМОТР НА УСТРОЙСТВАХ -->
+<div class="form-group">
+    <label><i class="fas fa-mobile-alt"></i> Предпросмотр на устройствах:</label>
+    <div class="device-preview-buttons">
+        <button type="button" class="device-btn active" data-device="desktop">
+            <i class="fas fa-desktop"></i> Десктоп
+        </button>
+        <button type="button" class="device-btn" data-device="tablet">
+            <i class="fas fa-tablet-alt"></i> Планшет
+        </button>
+        <button type="button" class="device-btn" data-device="mobile">
+            <i class="fas fa-mobile-alt"></i> Телефон
+        </button>
+    </div>
+</div>
+                <div class="form-group">
+                    <label for="skills"><i class="fas fa-cogs"></i> Навыки (через запятую):</label>
+                    <textarea id="skills" rows="3" placeholder="JavaScript, React, TypeScript, HTML/CSS, Node.js"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="experience"><i class="fas fa-history"></i> Опыт работы:</label>
+                    <textarea id="experience" rows="5" placeholder="• Frontend Developer в Яндекс (2021-2023)
+• Разработка SPA на React
+• Оптимизация производительности
+• Работа в команде из 5 человек"></textarea>
+                </div>
+
+                <!-- ДОБАВЛЕННЫЕ ПОЛЯ -->
+                <div class="form-group">
+                    <label for="projects"><i class="fas fa-project-diagram"></i> Проекты:</label>
+                    <textarea id="projects" rows="4" placeholder="• Pet-проект: интернет-магазин на React + Node.js
+• Опенсорс: контрибьютил в библиотеку UI-компонентов
+• Командный проект: мессенджер для разработчиков"></textarea>
+                    <small class="hint">Каждый проект с новой строки, начинайте с •</small>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-plus-circle"></i> Добавить раздел:</label>
+                    <div class="add-section-buttons">
+                        <button type="button" class="section-btn" data-section="education">
+                            <i class="fas fa-graduation-cap"></i> Образование
+                        </button>
+                        <button type="button" class="section-btn" data-section="languages">
+                            <i class="fas fa-language"></i> Языки
+                        </button>
+                        <button type="button" class="section-btn" data-section="certificates">
+                            <i class="fas fa-certificate"></i> Сертификаты
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Скрытые дополнительные поля -->
+                <div id="extraSections" style="display: none;"></div>
+
+                <div class="buttons">
+                    <button id="previewBtn" class="btn primary">
+                        <i class="fas fa-eye"></i> Обновить предпросмотр
+                    </button>
+                    <button id="exportBtn" class="btn success">
+                        <i class="fas fa-download"></i> Экспорт в PDF
+                    </button>
+                    <button id="saveBtn" class="btn secondary">
+                        <i class="fas fa-save"></i> Сохранить онлайн
+                    </button>
+                </div>
+
+                <div class="template-selector">
+                    <h3><i class="fas fa-palette"></i> Выберите шаблон:</h3>
+                    <div class="templates">
+                        <div class="template active" data-template="1">
+                            <div class="template-preview" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                            <span>Классический</span>
+                        </div>
+                        <div class="template" data-template="2">
+                            <div class="template-preview" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
+                            <span>Креативный</span>
+                        </div>
+                        <div class="template" data-template="3">
+                            <div class="template-preview" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
+                            <span>Минимализм</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Правая колонка: предпросмотр -->
+            <section class="preview">
+                <h2><i class="fas fa-file-alt"></i> Предпросмотр резюме</h2>
+                <div class="resume-preview" id="resumePreview">
+                    <!-- Сюда будет вставляться сгенерированное резюме -->
+                    <div class="resume" id="resumeTemplate">
+                        <header class="resume-header">
+                            <!-- АВАТАР В РЕЗЮМЕ -->
+<div class="avatar-container" id="avatarContainer" style="display: none;">
+    <img id="resumeAvatar" src="" alt="Аватар">
+</div>
+                            <h1 id="previewName">Иванов Алексей Петрович</h1>
+                            <p id="previewTitle">Frontend-разработчик (React)</p>
+                            <div class="contacts">
+                                <p><i class="fas fa-envelope"></i> <span id="previewEmail">alexey@example.com</span></p>
+                                <p><i class="fab fa-github"></i> <span id="previewGithub">github.com/username</span></p>
+                            </div>
+                        </header>
+                        
+                        <section class="resume-section">
+                            <h2><i class="fas fa-cogs"></i> Навыки</h2>
+                            <div class="skills-list" id="previewSkills">
+                                <span class="skill-tag">JavaScript</span>
+                                <span class="skill-tag">React</span>
+                                <span class="skill-tag">TypeScript</span>
+                            </div>
+                        </section>
+
+                        <section class="resume-section">
+                            <h2><i class="fas fa-briefcase"></i> Опыт работы</h2>
+                            <div id="previewExperience">
+                                <p>• Frontend Developer в Яндекс (2021-2023)</p>
+                                <p>• Разработка SPA на React</p>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                
+                <div class="preview-actions">
+                    <p><i class="fas fa-link"></i> Ваша ссылка: <code id="resumeLink">resume-builder.com/ale123</code></p>
+                    <button class="btn small"><i class="fas fa-copy"></i> Копировать ссылку</button>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>ResumeBuilder &copy; 2024 | Создано с <i class="fas fa-heart"></i> для IT-сообщества</p>
+        </footer>
+    </div>
+
+    <!-- Прогресс-бар для экспорта -->
+    <div id="exportProgress" style="display: none;">
+        <div class="progress-overlay">
+            <div class="progress-content">
+                <h3><i class="fas fa-file-pdf"></i> Экспорт в PDF</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <p id="progressText">Подготовка данных...</p>
+                <button id="cancelExport" class="btn secondary">
+                    <i class="fas fa-times"></i> Отменить
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <!-- Библиотека для копирования -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script>
+</body>
+</html>
