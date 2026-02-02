@@ -184,132 +184,139 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Обновление предпросмотра устройства
-    function updateDevicePreview() {
-        console.log('Обновление предпросмотра устройства:', currentDevice);
+    // Обновление предпросмотра устройства
+function updateDevicePreview() {
+    console.log('Обновление предпросмотра устройства:', currentDevice);
+    
+    // Убираем все элементы девайсов
+    const phoneNotch = document.getElementById('phone-notch');
+    const phoneButton = document.getElementById('phone-button');
+    const tabletButton = document.getElementById('tablet-button');
+    
+    if (phoneNotch) phoneNotch.remove();
+    if (phoneButton) phoneButton.remove();
+    if (tabletButton) tabletButton.remove();
+    
+    // Сбрасываем стили к базовым
+    resumePreview.style.cssText = `
+        border: 2px dashed #cbd5e0;
+        border-radius: 15px;
+        padding: 20px;
+        background: #fafafa;
+        min-height: 500px;
+        overflow-y: auto;
+        transition: all 0.5s ease;
+        margin: 0;
+        width: 100%;
+        max-width: none;
+        height: auto;
+        position: relative;
+    `;
+    
+    // Применяем стили для каждого устройства
+    if (currentDevice === 'mobile') {
+        console.log('📱 Мобильный предпросмотр');
         
-        // Сначала убираем все элементы девайсов
-        const phoneNotch = document.getElementById('phone-notch');
-        const phoneButton = document.getElementById('phone-button');
-        const tabletButton = document.getElementById('tablet-button');
+        // Адаптируем размер под экран
+        const isMobileScreen = window.innerWidth <= 480;
+        const previewWidth = isMobileScreen ? '280px' : '375px';
+        const previewHeight = isMobileScreen ? '550px' : '700px';
         
-        if (phoneNotch) phoneNotch.remove();
-        if (phoneButton) phoneButton.remove();
-        if (tabletButton) tabletButton.remove();
-        
-        // Сбрасываем стили к базовым
         resumePreview.style.cssText = `
-            border: 2px dashed #cbd5e0;
-            border-radius: 15px;
-            padding: 30px;
-            background: #fafafa;
-            min-height: 700px;
+            width: ${previewWidth};
+            max-width: ${previewWidth};
+            height: ${previewHeight};
+            margin: 10px auto;
+            border: 15px solid #1a202c;
+            border-top-width: 50px;
+            border-bottom-width: 50px;
+            border-radius: 40px;
+            padding: 15px 10px;
+            background: white;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+            position: relative;
             overflow-y: auto;
             transition: all 0.5s ease;
-            margin: 0;
-            width: 100%;
-            max-width: none;
-            height: auto;
-            position: relative;
         `;
         
-        const resume = document.querySelector('.resume');
-        if (resume) {
-            resume.style.maxWidth = '800px';
-            resume.style.margin = '0 auto';
-        }
+        // Добавляем чёлку телефона
+        const notch = document.createElement('div');
+        notch.id = 'phone-notch';
+        notch.style.cssText = `
+            position: absolute;
+            top: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 25px;
+            background: #1a202c;
+            border-radius: 20px;
+            z-index: 1;
+        `;
+        resumePreview.appendChild(notch);
         
-        // Применяем стили для каждого устройства
-        if (currentDevice === 'mobile') {
-            console.log('📱 Мобильный предпросмотр (375px)');
-            resumePreview.style.cssText = `
-                width: 375px;
-                max-width: 375px;
-                height: 700px;
-                margin: 20px auto;
-                border: 15px solid #1a202c;
-                border-top-width: 50px;
-                border-bottom-width: 50px;
-                border-radius: 40px;
-                padding: 20px 15px;
-                background: white;
-                box-shadow: 0 25px 80px rgba(0,0,0,0.3);
-                position: relative;
-                overflow-y: auto;
-                transition: all 0.5s ease;
-            `;
-            
-            // Добавляем чёлку телефона
-            const notch = document.createElement('div');
-            notch.id = 'phone-notch';
-            notch.style.cssText = `
-                position: absolute;
-                top: -35px;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 100px;
-                height: 25px;
-                background: #1a202c;
-                border-radius: 20px;
-                z-index: 1;
-            `;
-            resumePreview.appendChild(notch);
-            
-            // Добавляем кнопку телефона
-            const button = document.createElement('div');
-            button.id = 'phone-button';
-            button.style.cssText = `
-                position: absolute;
-                bottom: -35px;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 50px;
-                height: 50px;
-                background: #1a202c;
-                border-radius: 50%;
-                z-index: 1;
-            `;
-            resumePreview.appendChild(button);
-            
-        } else if (currentDevice === 'tablet') {
-            console.log('📟 Планшетный предпросмотр (768px)');
-            resumePreview.style.cssText = `
-                width: 768px;
-                max-width: 768px;
-                height: 900px;
-                margin: 20px auto;
-                border: 15px solid #1a202c;
-                border-top-width: 40px;
-                border-bottom-width: 40px;
-                border-radius: 25px;
-                padding: 40px 30px;
-                background: white;
-                box-shadow: 0 25px 80px rgba(0,0,0,0.3);
-                position: relative;
-                overflow-y: auto;
-                transition: all 0.5s ease;
-            `;
-            
-            // Добавляем кнопку планшета
-            const button = document.createElement('div');
-            button.id = 'tablet-button';
-            button.style.cssText = `
-                position: absolute;
-                top: -25px;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 60px;
-                height: 5px;
-                background: #2d3748;
-                border-radius: 10px;
-                z-index: 1;
-            `;
-            resumePreview.appendChild(button);
-            
-        } else {
-            console.log('🖥️ Десктопный предпросмотр (полный размер)');
-            // Оставляем базовые стили (уже установлены выше)
-        }
+        // Добавляем кнопку телефона
+        const button = document.createElement('div');
+        button.id = 'phone-button';
+        button.style.cssText = `
+            position: absolute;
+            bottom: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+            background: #1a202c;
+            border-radius: 50%;
+            z-index: 1;
+        `;
+        resumePreview.appendChild(button);
+        
+    } else if (currentDevice === 'tablet') {
+        console.log('📟 Планшетный предпросмотр');
+        
+        // Адаптируем размер под экран
+        const isMobileScreen = window.innerWidth <= 768;
+        const previewWidth = isMobileScreen ? '450px' : '768px';
+        const previewHeight = isMobileScreen ? '700px' : '900px';
+        
+        resumePreview.style.cssText = `
+            width: ${previewWidth};
+            max-width: ${previewWidth};
+            height: ${previewHeight};
+            margin: 10px auto;
+            border: 15px solid #1a202c;
+            border-top-width: 40px;
+            border-bottom-width: 40px;
+            border-radius: 25px;
+            padding: 30px 20px;
+            background: white;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+            position: relative;
+            overflow-y: auto;
+            transition: all 0.5s ease;
+        `;
+        
+        // Добавляем кнопку планшета
+        const button = document.createElement('div');
+        button.id = 'tablet-button';
+        button.style.cssText = `
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 5px;
+            background: #2d3748;
+            border-radius: 10px;
+            z-index: 1;
+        `;
+        resumePreview.appendChild(button);
+        
+    } else {
+        console.log('🖥️ Десктопный предпросмотр');
+        // Оставляем базовые стили
     }
+}
     
     // === LOCALSTORAGE ФУНКЦИИ ===
     
@@ -1191,4 +1198,25 @@ modalStyles.textContent = `
     }
 `;
 document.head.appendChild(modalStyles);
+// Адаптация под размер экрана
+window.addEventListener('resize', function() {
+    // Обновляем предпросмотр устройства при изменении размера окна
+    if (currentDevice === 'mobile' || currentDevice === 'tablet') {
+        updateDevicePreview();
+    }
+});
+
+// Проверяем мобильное устройство
+function checkMobileDevice() {
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    if (isMobile) {
+        console.log('📱 Обнаружено мобильное устройство');
+        // Можно добавить специфичные настройки для мобилок
+        document.body.classList.add('mobile-device');
+    }
+}
+
+// Вызываем при загрузке
+setTimeout(checkMobileDevice, 500);
 });
